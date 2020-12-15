@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenLocal()
+    }
+    dependencies {
+        // Multi-OS Engine plugin
+        classpath group: 'org.multi-os-engine.community', name: 'moe-gradle', version: '1.7.+'
+    }
+}
+
+apply plugin: 'moe'
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+repositories {
+    jcenter()
+}
+
+// Exclude all files from Gradle's test runner
+test { exclude '**' }
+
+// Setup Multi-OS Engine
+moe {
+    xcode {
+        project 'xcode/mlkit-test.xcodeproj'
+        mainTarget 'mlkit-test'
+        testTarget 'mlkit-test-Test'
+
+        // Uncomment and change these settings if you are working with a Xcode workspace
+        workspace 'xcode/mlkit-test.xcworkspace'
+        mainScheme 'mlkit-test'
+        testScheme 'mlkit-test-Test'
+    }
+}
+
+dependencies {
+    // Compile with 'jar' files in the project's 'lib' directory
+    compile fileTree(dir: 'lib', include: '*.jar')
+}
+

@@ -1,0 +1,21 @@
+{
+  "output": "src/main/java",
+  "platform": "iOS",
+  "bindings": [
+    {
+      "type": "header",
+      "name": "MlKit",
+      "objcClassGenerationMode": "Binding",
+      "headerPath": "xcode/Pods/MLKitTextRecognition/Frameworks/MLKitTextRecognition.framework/Headers",
+      "headerSearchPaths": [
+        "xcode/Pods/MLKitVision/Frameworks/MLKitVision.framework/Headers",
+        "xcode/Pods/MLKitTextRecognition/Frameworks/MLKitTextRecognition.framework/Headers",
+        "xcode/Pods/MLKitCommon/Frameworks/MLKitCommon.framework/Headers"
+      ],
+      "userHeaderSearchPaths": [],
+      "frameworkSearchPaths": [],
+      "packageBase": "com.google.mlkit",
+      "importCode": "#import <MLKitCommon.h>\n#import <MLKitVision.h>\n#import <MLKitTextRecognition.h>"
+    }
+  ]
+}
