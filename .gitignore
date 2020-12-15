@@ -26,3 +26,4 @@ bin
 /xcode/DerivedData/
 /xcode/Pods/
 /xcode/Podfile.lock
+/local.properties
