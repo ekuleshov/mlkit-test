@@ -3,6 +3,7 @@ package org.euxx.mlkit.test;
 import apple.NSObject;
 import apple.foundation.NSBundle;
 import apple.foundation.NSDictionary;
+import apple.foundation.NSError;
 import apple.uikit.ITargetAction;
 import apple.uikit.UIApplication;
 import apple.uikit.UIBarButtonItem;
@@ -28,7 +29,11 @@ import static apple.foundation.c.Foundation.NSLocalizedString;
 public class Main extends NSObject implements UIApplicationDelegate {
 
     public static void main(String[] args) {
-        UIKit.UIApplicationMain(0, null, null, Main.class.getName());
+        try {
+            UIKit.UIApplicationMain(0, null, null, Main.class.getName());
+        } catch(Throwable ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Selector("alloc")
@@ -43,6 +48,8 @@ public class Main extends NSObject implements UIApplicationDelegate {
 
     @Override
     public boolean applicationDidFinishLaunchingWithOptions(UIApplication application, NSDictionary launchOptions) {
+        Thread.setDefaultUncaughtExceptionHandler(new MainExceptionHandler());
+
         main = AppViewController.alloc();
         main.initWithNibNameBundle("InfoController", NSBundle.mainBundle());
         main.setTitle("ML Kit Test");
@@ -71,5 +78,19 @@ public class Main extends NSObject implements UIApplicationDelegate {
     @Override
     public UIWindow window() {
         return window;
+    }
+
+    static class MainExceptionHandler implements Thread.UncaughtExceptionHandler {
+        private final Thread.UncaughtExceptionHandler defaultHandler;
+
+        public MainExceptionHandler() {
+            this.defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+        }
+
+        @Override
+        public void uncaughtException(Thread t, Throwable e) {
+            e.printStackTrace();
+            defaultHandler.uncaughtException(t, e);
+        }
     }
 }
