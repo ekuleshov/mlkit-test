@@ -6,7 +6,7 @@
       "type": "header",
       "name": "MlKit",
       "objcClassGenerationMode": "Binding",
-      "headerPath": "xcode/Pods/MLKitTextRecognition/Frameworks/MLKitTextRecognition.framework/Headers",
+      "headerPath": "xcode/Pods",
       "headerSearchPaths": [
         "xcode/Pods/MLKitVision/Frameworks/MLKitVision.framework/Headers",
         "xcode/Pods/MLKitTextRecognition/Frameworks/MLKitTextRecognition.framework/Headers",

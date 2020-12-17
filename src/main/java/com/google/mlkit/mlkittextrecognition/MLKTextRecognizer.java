@@ -23,6 +23,11 @@ import org.moe.natj.objc.SEL;
 import org.moe.natj.objc.ann.ObjCClassBinding;
 import org.moe.natj.objc.ann.Selector;
 import org.moe.natj.objc.map.ObjCObjectMapper;
+import apple.foundation.NSError;
+import com.google.mlkit.mlkitvision.MLKVisionImage;
+import org.moe.natj.general.ann.ReferenceInfo;
+import org.moe.natj.general.ptr.Ptr;
+import org.moe.natj.objc.ann.ObjCBlock;
 
 @Generated
 @Library("MLKitTextRecognition")
@@ -146,4 +151,22 @@ public class MLKTextRecognizer extends NSObject {
 	@Selector("version")
 	@NInt
 	public static native long version_static();
+
+	@Generated
+	@Selector("processImage:completion:")
+	public native void processImageCompletion(
+			MLKVisionImage image,
+			@ObjCBlock(name = "call_processImageCompletion") Block_processImageCompletion completion);
+
+	@Runtime(ObjCRuntime.class)
+	@Generated
+	public interface Block_processImageCompletion {
+		@Generated
+		void call_processImageCompletion(MLKText text, NSError error);
+	}
+
+	@Generated
+	@Selector("resultsInImage:error:")
+	public native MLKText resultsInImageError(MLKVisionImage image,
+			@ReferenceInfo(type = NSError.class) Ptr<NSError> error);
 }
